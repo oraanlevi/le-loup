@@ -1036,6 +1036,15 @@ body{
   #nav-burger{display:flex}
   #mobile-nav{display:flex}
 }
+@media(max-width:860px){
+  #hp-dining > div:last-child{grid-template-columns:1fr!important}
+  #hp-membership{padding:80px 32px!important}
+}
+@media(max-width:560px){
+  #hp-dining{padding:40px 0!important}
+  #hp-dining > div:first-child{padding:0 24px!important;margin-bottom:36px!important}
+  #hp-membership{padding:64px 24px!important}
+}
 /* ── OVERLAY MOBILE FIXES ── */
 @media(max-width:560px){
   .sec-overlay [style*="align-items:baseline"][style*="gap:clamp"]{flex-wrap:wrap}
@@ -1088,6 +1097,7 @@ body{
 
   <!-- Scroll hint -->
   <div id="hero-scroll-hint" style="position:absolute;bottom:36px;left:50%;transform:translateX(-50%);z-index:3;text-align:center;opacity:0;transition:opacity 1s ease;pointer-events:none">
+    <div style="font-family:'Cormorant Garamond',serif;font-size:clamp(10px,1vw,12px);font-weight:300;font-style:italic;color:var(--ivory);letter-spacing:0.2em;opacity:0.45;margin-bottom:20px">A private members club. West Hollywood.</div>
     <div style="width:0.5px;height:32px;background:linear-gradient(to bottom,transparent,rgba(167,134,82,0.5));margin:0 auto 12px"></div>
     <div style="font-family:'Inter',sans-serif;font-size:7px;letter-spacing:0.65em;color:var(--brass);text-transform:uppercase;text-indent:0.65em">Scroll</div>
   </div>
@@ -1098,20 +1108,23 @@ body{
 <div id="site-stage">
 
   <nav class="site-nav">
-    <a class="nav-mark nav-hidden" id="nav-mark" href="#" onclick="event.preventDefault();hpScroll('hp-01')"><img src="logo.png" alt="Le Loup" style="height:68px;width:auto;display:block;mix-blend-mode:screen"></a>
+    <a class="nav-mark nav-hidden" id="nav-mark" href="#" onclick="event.preventDefault();window.scrollTo({top:0,behavior:'smooth'})"><img src="logo.png" alt="Le Loup" style="height:68px;width:auto;display:block;mix-blend-mode:screen"></a>
     <div class="nav-items">
-      <span class="nav-item nav-hidden" id="nav-1" onclick="openOverlay('overlay-house')">The House</span>
-      <span class="nav-item nav-hidden" id="nav-2" onclick="openOverlay('overlay-consideration')">Consideration</span>
-      <span class="nav-item nav-hidden nav-dropdown" id="nav-3" onclick="toggleGatheringsMenu(event)">
+      <span class="nav-item nav-hidden" id="nav-1" onclick="hpScroll('hp-03')">The Club</span>
+      <span class="nav-item nav-hidden" id="nav-2" onclick="openOverlay('overlay-house')">The House</span>
+      <span class="nav-item nav-hidden" id="nav-3" onclick="hpScroll('hp-dining')">Dining</span>
+      <span class="nav-item nav-hidden nav-dropdown" id="nav-4" onclick="toggleGatheringsMenu(event)">
         Gatherings
         <div class="nav-dropdown-menu" id="gatherings-menu">
-          <div class="nav-dropdown-item" onclick="openOverlay('overlay-founders');closeGatheringsMenu()">Founders Dinner</div>
+          <div class="nav-dropdown-item" onclick="openOverlay('overlay-founders');closeGatheringsMenu()">Founder Dinners</div>
           <div class="nav-dropdown-item" onclick="openOverlay('overlay-salons');closeGatheringsMenu()">Architecture Salons</div>
+          <div class="nav-dropdown-item" onclick="openOverlay('overlay-screenings');closeGatheringsMenu()">Private Screenings</div>
           <div class="nav-dropdown-item" onclick="openOverlay('overlay-wine');closeGatheringsMenu()">Wine Gatherings</div>
         </div>
       </span>
+      <span class="nav-item nav-hidden" id="nav-5" onclick="hpScroll('hp-membership')">Membership</span>
     </div>
-    <span class="nav-item nav-hidden" id="nav-4" style="color:rgba(167,134,82,0.85);" onclick="openOverlay('overlay-consideration')">Request Consideration</span>
+    <span class="nav-item nav-hidden" id="nav-6" style="color:rgba(167,134,82,0.85);" onclick="openOverlay('overlay-consideration')">Request Consideration</span>
     <button id="nav-burger" onclick="toggleMobileNav()" aria-label="Menu">
       <span></span><span></span><span></span>
     </button>
@@ -1119,12 +1132,15 @@ body{
 
   <!-- MOBILE NAV PANEL -->
   <div id="mobile-nav">
+    <div onclick="hpScroll('hp-03');closeMobileNav()" class="mob-nav-item">The Club</div>
     <div onclick="openOverlay('overlay-house');closeMobileNav()" class="mob-nav-item">The House</div>
-    <div onclick="openOverlay('overlay-consideration');closeMobileNav()" class="mob-nav-item">Consideration</div>
+    <div onclick="hpScroll('hp-dining');closeMobileNav()" class="mob-nav-item">Dining</div>
     <div class="mob-nav-item" style="opacity:0.35;cursor:default;font-size:clamp(16px,4.5vw,24px);border-bottom:none;padding-bottom:4px;pointer-events:none">Gatherings</div>
-    <div onclick="openOverlay('overlay-founders');closeMobileNav()" class="mob-nav-sub">Founders Dinner</div>
+    <div onclick="openOverlay('overlay-founders');closeMobileNav()" class="mob-nav-sub">Founder Dinners</div>
     <div onclick="openOverlay('overlay-salons');closeMobileNav()" class="mob-nav-sub">Architecture Salons</div>
+    <div onclick="openOverlay('overlay-screenings');closeMobileNav()" class="mob-nav-sub">Private Screenings</div>
     <div onclick="openOverlay('overlay-wine');closeMobileNav()" class="mob-nav-sub" style="border-bottom:0.5px solid rgba(242,237,230,0.07);padding-bottom:20px">Wine Gatherings</div>
+    <div onclick="hpScroll('hp-membership');closeMobileNav()" class="mob-nav-item">Membership</div>
     <div onclick="openOverlay('overlay-consideration');closeMobileNav()" class="mob-nav-item mob-nav-cta">Request Consideration</div>
   </div>
 
@@ -1184,6 +1200,26 @@ body{
     <div style="padding:16px 64px 0"><div style="display:inline-block;margin-top:24px;font-family:'Inter',sans-serif;font-size:7.5px;letter-spacing:0.55em;text-indent:0.55em;color:var(--brass);text-transform:uppercase;opacity:0.6;cursor:pointer;transition:opacity 0.3s,letter-spacing 0.4s;border-bottom:0.5px solid rgba(167,134,82,0.25);padding-bottom:3px" onclick="hpScroll('hp-04')" onmouseover="this.style.opacity='1';this.style.letterSpacing='0.65em'" onmouseout="this.style.opacity='0.6';this.style.letterSpacing='0.55em'">The House</div></div>
   </section>
 
+  <!-- ── DINING ── -->
+  <section id="hp-dining" style="background:#050505;padding:48px 0">
+    <div style="padding:0 64px;margin-bottom:48px">
+      <div style="font-family:'Inter',sans-serif;font-size:8px;letter-spacing:0.65em;color:var(--brass);text-transform:uppercase;opacity:0.6;text-indent:0.65em;margin-bottom:20px">Dining</div>
+      <div style="width:28px;height:0.5px;background:rgba(167,134,82,0.45);margin-bottom:48px"></div>
+      <div class="hp-label" style="cursor:default;margin-bottom:0">The Table</div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:2px">
+      <div style="position:relative;overflow:hidden">
+        <div style="aspect-ratio:3/2;overflow:hidden">
+          <img src="salon.png" alt="The Dining Room" style="width:100%;height:100%;object-fit:cover;display:block">
+        </div>
+      </div>
+      <div style="background:#050505;padding:clamp(40px,6vw,96px) clamp(32px,5vw,80px);display:flex;flex-direction:column;justify-content:center">
+        <div style="font-family:'Cormorant Garamond',serif;font-size:clamp(15px,1.5vw,18px);font-weight:300;color:var(--ivory);opacity:0.55;line-height:1.9;margin-bottom:40px">The dining room at Le Loup is open to members and their guests. The menu changes with the season. Wine comes from the cellar below.<br><br>Dinner here is not a backdrop to the conversation. It is where the conversation begins.</div>
+        <div onclick="openOverlay('overlay-reservation')" style="display:inline-block;font-family:'Inter',sans-serif;font-size:7.5px;letter-spacing:0.55em;text-indent:0.55em;color:var(--brass);text-transform:uppercase;opacity:0.75;cursor:pointer;transition:opacity 0.3s,letter-spacing 0.4s;border-bottom:0.5px solid rgba(167,134,82,0.3);padding-bottom:3px;width:fit-content" onmouseover="this.style.opacity='1';this.style.letterSpacing='0.65em'" onmouseout="this.style.opacity='0.75';this.style.letterSpacing='0.55em'">Reserve a Table</div>
+      </div>
+    </div>
+  </section>
+
   <!-- ── 05 WHO COMES HERE ── -->
   <section id="hp-05" style="background:#050505;padding:48px 64px">
     <div style="width:100%">
@@ -1197,7 +1233,7 @@ body{
         <div class="hp-who-item">Writers</div>
         <div class="hp-who-item">Builders</div>
       </div>
-      <div style="display:inline-block;margin-top:24px;font-family:'Inter',sans-serif;font-size:7.5px;letter-spacing:0.55em;text-indent:0.55em;color:var(--brass);text-transform:uppercase;opacity:0.6;cursor:pointer;transition:opacity 0.3s,letter-spacing 0.4s;border-bottom:0.5px solid rgba(167,134,82,0.25);padding-bottom:3px" onclick="hpScroll('hp-08')" onmouseover="this.style.opacity='1';this.style.letterSpacing='0.65em'" onmouseout="this.style.opacity='0.6';this.style.letterSpacing='0.55em'">Consideration</div>
+      <div style="display:inline-block;margin-top:24px;font-family:'Inter',sans-serif;font-size:7.5px;letter-spacing:0.55em;text-indent:0.55em;color:var(--brass);text-transform:uppercase;opacity:0.6;cursor:pointer;transition:opacity 0.3s,letter-spacing 0.4s;border-bottom:0.5px solid rgba(167,134,82,0.25);padding-bottom:3px" onclick="hpScroll('hp-membership')" onmouseover="this.style.opacity='1';this.style.letterSpacing='0.65em'" onmouseout="this.style.opacity='0.6';this.style.letterSpacing='0.55em'">Membership</div>
     </div>
   </section>
 
@@ -1208,20 +1244,23 @@ body{
       <div class="hp-gatherings-list">
         <div class="hp-gathering-item" onclick="openOverlay('overlay-founders')" style="cursor:pointer"><span class="hp-gathering-name">Founder Dinners</span><span class="hp-gathering-arrow">→</span></div>
         <div class="hp-gathering-item" onclick="openOverlay('overlay-salons')" style="cursor:pointer"><span class="hp-gathering-name">Architecture Salons</span><span class="hp-gathering-arrow">→</span></div>
-        <div class="hp-gathering-item" onclick="openOverlay('overlay-gatherings')" style="cursor:pointer"><span class="hp-gathering-name">Private Screenings</span><span class="hp-gathering-arrow">→</span></div>
+        <div class="hp-gathering-item" onclick="openOverlay('overlay-screenings')" style="cursor:pointer"><span class="hp-gathering-name">Private Screenings</span><span class="hp-gathering-arrow">→</span></div>
         <div class="hp-gathering-item" onclick="openOverlay('overlay-wine')" style="cursor:pointer"><span class="hp-gathering-name">Wine Gatherings</span><span class="hp-gathering-arrow">→</span></div>
       </div>
       <div style="display:inline-block;margin-top:24px;font-family:'Inter',sans-serif;font-size:7.5px;letter-spacing:0.55em;text-indent:0.55em;color:var(--brass);text-transform:uppercase;opacity:0.6;cursor:pointer;transition:opacity 0.3s,letter-spacing 0.4s;border-bottom:0.5px solid rgba(167,134,82,0.25);padding-bottom:3px" onclick="openOverlay('overlay-gatherings')" onmouseover="this.style.opacity='1';this.style.letterSpacing='0.65em'" onmouseout="this.style.opacity='0.6';this.style.letterSpacing='0.55em'">View All Gatherings</div>
     </div>
   </section>
 
-  <!-- ── 07 QUOTE ── -->
-  <section id="hp-07" style="background:#050505;padding:48px 64px;display:flex;align-items:center;justify-content:center;text-align:center">
-    <div style="max-width:760px">
-      <div style="width:0.5px;height:40px;background:linear-gradient(to bottom,transparent,rgba(167,134,82,0.4));margin:0 auto 48px"></div>
-      <blockquote style="font-family:'Cormorant Garamond',serif;font-size:clamp(22px,3vw,40px);font-weight:300;font-style:italic;color:var(--ivory);line-height:1.55;margin-bottom:40px">"Every meaningful opportunity I've had in the last year started with a conversation at Le Loup."</blockquote>
-      <div style="width:24px;height:0.5px;background:rgba(167,134,82,0.4);margin:0 auto 20px"></div>
-      <div style="font-family:'Inter',sans-serif;font-size:8px;letter-spacing:0.45em;color:var(--brass);text-transform:uppercase;opacity:0.7">Member, Le Loup</div>
+  <!-- ── MEMBERSHIP ── -->
+  <section id="hp-membership" style="background:#050505;padding:96px 64px">
+    <div style="max-width:760px;margin:0 auto">
+      <div style="font-family:'Inter',sans-serif;font-size:8px;letter-spacing:0.65em;color:var(--brass);text-transform:uppercase;opacity:0.6;text-indent:0.65em;margin-bottom:20px">Membership</div>
+      <div style="width:28px;height:0.5px;background:rgba(167,134,82,0.45);margin-bottom:48px"></div>
+      <div class="hp-label" style="cursor:default;margin-bottom:40px">Access To The Pack</div>
+      <div style="font-family:'Cormorant Garamond',serif;font-size:clamp(15px,1.5vw,18px);font-weight:300;color:var(--ivory);opacity:0.52;line-height:1.9;margin-bottom:16px">Le Loup is a private members club. Access is by consideration only.</div>
+      <div style="font-family:'Cormorant Garamond',serif;font-size:clamp(15px,1.5vw,18px);font-weight:300;color:var(--ivory);opacity:0.52;line-height:1.9;margin-bottom:16px">Membership opens The House, the dining room, and a year of gatherings built around culture, conversation, and the people in the room.</div>
+      <div style="font-family:'Cormorant Garamond',serif;font-size:clamp(15px,1.5vw,18px);font-weight:300;color:var(--ivory);opacity:0.52;line-height:1.9;margin-bottom:48px">If you would like to be considered, tell us about yourself.</div>
+      <div onclick="openOverlay('overlay-consideration')" style="display:inline-block;font-family:'Inter',sans-serif;font-size:7.5px;letter-spacing:0.55em;text-indent:0.55em;color:var(--brass);text-transform:uppercase;border:0.5px solid rgba(167,134,82,0.35);padding:18px 40px;cursor:pointer;transition:border-color 0.3s,opacity 0.3s;opacity:0.85" onmouseover="this.style.borderColor='rgba(167,134,82,0.8)';this.style.opacity='1'" onmouseout="this.style.borderColor='rgba(167,134,82,0.35)';this.style.opacity='0.85'">Request Consideration</div>
     </div>
   </section>
 
@@ -1237,13 +1276,13 @@ body{
 
     <div style="display:flex;flex-direction:column;gap:16px">
       <span onclick="openOverlay('overlay-consideration')" style="font-family:'Inter',sans-serif;font-size:8px;letter-spacing:0.45em;color:var(--ivory);text-transform:uppercase;opacity:0.45;cursor:pointer;transition:opacity 0.3s" onmouseover="this.style.opacity=0.9" onmouseout="this.style.opacity=0.45">Request Consideration</span>
-      <span style="font-family:'Inter',sans-serif;font-size:8px;letter-spacing:0.45em;color:var(--ivory);text-transform:uppercase;opacity:0.45;cursor:pointer;transition:opacity 0.3s" onmouseover="this.style.opacity=0.9" onmouseout="this.style.opacity=0.45">Instagram</span>
-      <span style="font-family:'Inter',sans-serif;font-size:8px;letter-spacing:0.45em;color:var(--ivory);text-transform:uppercase;opacity:0.45;cursor:pointer;transition:opacity 0.3s" onmouseover="this.style.opacity=0.9" onmouseout="this.style.opacity=0.45">Contact</span>
+      <span onclick="openOverlay('overlay-reservation')" style="font-family:'Inter',sans-serif;font-size:8px;letter-spacing:0.45em;color:var(--ivory);text-transform:uppercase;opacity:0.45;cursor:pointer;transition:opacity 0.3s" onmouseover="this.style.opacity=0.9" onmouseout="this.style.opacity=0.45">Reserve a Table</span>
     </div>
 
     <div>
       <div style="font-family:'Inter',sans-serif;font-size:8px;letter-spacing:0.45em;color:var(--brass);text-transform:uppercase;opacity:0.6;margin-bottom:10px">Location</div>
-      <div style="font-family:'Cormorant Garamond',serif;font-size:14px;font-weight:300;color:var(--ivory);opacity:0.4;line-height:1.7">Private Address<br>By Invitation Only</div>
+      <div style="font-family:'Cormorant Garamond',serif;font-size:14px;font-weight:300;color:var(--ivory);opacity:0.4;line-height:1.7">West Hollywood<br>Los Angeles</div>
+      <div style="font-family:'Inter',sans-serif;font-size:8px;letter-spacing:0.3em;color:var(--ivory);opacity:0.18;margin-top:32px;text-indent:0.3em">Le Loup is a private members club. All rights reserved.</div>
     </div>
 
   </footer>
@@ -1266,11 +1305,11 @@ body{
         <div class="ra-body"><p>Private desks. Long windows. A room designed for the work that precedes the meeting.</p></div>
       </div>
       <div class="ra-item" onclick="toggleRoom(this)">
-        <div class="ra-header"><div class="ra-left"><span class="ra-num">03</span><span class="ra-name">The Dining Room</span></div><div class="ra-img-wrap"><img class="ra-img" src="dining-room.png" alt="The Dining Room"></div><span class="ra-arrow">+</span></div>
+        <div class="ra-header"><div class="ra-left"><span class="ra-num">03</span><span class="ra-name">The Dining Room</span></div><div class="ra-img-wrap"><img class="ra-img" src="salon.png" alt="The Dining Room"></div><span class="ra-arrow">+</span></div>
         <div class="ra-body"><p>A single long table. Candlelight. Dinner at Le Loup is not a backdrop. It is the event itself.</p></div>
       </div>
       <div class="ra-item" onclick="toggleRoom(this)">
-        <div class="ra-header"><div class="ra-left"><span class="ra-num">04</span><span class="ra-name">The Archival</span></div><div class="ra-img-wrap"><img class="ra-img" src="the-archives.png" alt="The Archival"></div><span class="ra-arrow">+</span></div>
+        <div class="ra-header"><div class="ra-left"><span class="ra-num">04</span><span class="ra-name">The Archival</span></div><div class="ra-img-wrap"><img class="ra-img" src="cellar.png" alt="The Archival"></div><span class="ra-arrow">+</span></div>
         <div class="ra-body"><p>A private archive of art, objects, and ideas. Where the house keeps its memory.</p></div>
       </div>
       <div class="ra-item" onclick="toggleRoom(this)">
@@ -1288,9 +1327,104 @@ body{
 <!-- ── OVERLAY: CONSIDERATION ── -->
 <div class="sec-overlay" id="overlay-consideration" style="background:#f2ede6">
   <div class="sec-overlay-back" onclick="closeOverlay('overlay-consideration')" style="color:#111">← Back</div>
-  <div style="min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:100px 64px 60px">
-    <div style="font-family:'Inter',sans-serif;font-size:8px;letter-spacing:0.55em;color:#888;text-transform:uppercase;margin-bottom:32px;text-indent:0.55em">Consideration</div>
-    <img src="consideration.png" alt="Consideration" style="max-width:80vw;max-height:80vh;width:auto;height:auto;display:block;margin:0 auto">
+  <div style="min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:100px clamp(24px,8vw,120px) 80px">
+    <div style="width:100%;max-width:520px">
+      <div id="consideration-form-wrap">
+        <div style="font-family:'Inter',sans-serif;font-size:8px;letter-spacing:0.55em;color:#A78652;text-transform:uppercase;margin-bottom:12px;text-indent:0.55em">Membership</div>
+        <div style="font-family:'Cormorant Garamond',serif;font-size:clamp(28px,4vw,52px);font-weight:200;color:#111;letter-spacing:0.03em;margin-bottom:12px">Consideration</div>
+        <div style="font-family:'Cormorant Garamond',serif;font-size:clamp(14px,1.3vw,16px);font-weight:300;font-style:italic;color:#555;line-height:1.7;margin-bottom:56px">Membership at Le Loup is by consideration. We review all requests personally.</div>
+        <form onsubmit="handleConsideration(event)" style="display:flex;flex-direction:column">
+          <div style="border-bottom:0.5px solid rgba(0,0,0,0.1);border-top:0.5px solid rgba(0,0,0,0.1);display:flex;align-items:center">
+            <label style="font-family:'Inter',sans-serif;font-size:7.5px;letter-spacing:0.45em;color:#A78652;text-transform:uppercase;white-space:nowrap;flex-shrink:0;width:80px;opacity:0.8;text-indent:0.45em">Name</label>
+            <input type="text" name="name" required placeholder="Your name" style="background:transparent;border:none;outline:none;padding:18px 0;font-family:'Cormorant Garamond',serif;font-size:15px;font-weight:300;color:#111;width:100%;letter-spacing:0.02em" class="consideration-input">
+          </div>
+          <div style="border-bottom:0.5px solid rgba(0,0,0,0.1);display:flex;align-items:center">
+            <label style="font-family:'Inter',sans-serif;font-size:7.5px;letter-spacing:0.45em;color:#A78652;text-transform:uppercase;white-space:nowrap;flex-shrink:0;width:80px;opacity:0.8;text-indent:0.45em">Email</label>
+            <input type="email" name="email" required placeholder="Your email" style="background:transparent;border:none;outline:none;padding:18px 0;font-family:'Cormorant Garamond',serif;font-size:15px;font-weight:300;color:#111;width:100%;letter-spacing:0.02em" class="consideration-input">
+          </div>
+          <div style="border-bottom:0.5px solid rgba(0,0,0,0.1);display:flex;align-items:center">
+            <label style="font-family:'Inter',sans-serif;font-size:7.5px;letter-spacing:0.45em;color:#A78652;text-transform:uppercase;white-space:nowrap;flex-shrink:0;width:80px;opacity:0.8;text-indent:0.45em">Referred by</label>
+            <input type="text" name="referred" placeholder="Optional" style="background:transparent;border:none;outline:none;padding:18px 0;font-family:'Cormorant Garamond',serif;font-size:15px;font-weight:300;color:#111;width:100%;letter-spacing:0.02em" class="consideration-input">
+          </div>
+          <div style="border-bottom:0.5px solid rgba(0,0,0,0.1);display:flex;align-items:flex-start;padding-top:4px">
+            <label style="font-family:'Inter',sans-serif;font-size:7.5px;letter-spacing:0.45em;color:#A78652;text-transform:uppercase;white-space:nowrap;flex-shrink:0;width:80px;opacity:0.8;text-indent:0.45em;padding-top:18px">About</label>
+            <textarea name="about" required placeholder="Who you are, what you do, what brings you to Le Loup" rows="4" style="background:transparent;border:none;outline:none;padding:18px 0;font-family:'Cormorant Garamond',serif;font-size:15px;font-weight:300;color:#111;width:100%;letter-spacing:0.02em;resize:none;line-height:1.6" class="consideration-input"></textarea>
+          </div>
+          <button type="submit" style="margin-top:40px;background:transparent;border:0.5px solid rgba(167,134,82,0.45);color:#A78652;font-family:'Inter',sans-serif;font-size:8px;letter-spacing:0.55em;text-transform:uppercase;padding:18px;cursor:pointer;transition:border-color 0.3s,background 0.3s;text-indent:0.55em" onmouseover="this.style.borderColor='rgba(167,134,82,0.9)';this.style.background='rgba(167,134,82,0.05)'" onmouseout="this.style.borderColor='rgba(167,134,82,0.45)';this.style.background='transparent'">Submit</button>
+        </form>
+      </div>
+      <div id="consideration-confirm" style="display:none;text-align:center;padding:40px 0">
+        <div style="width:0.5px;height:48px;background:linear-gradient(to bottom,transparent,rgba(167,134,82,0.4));margin:0 auto 48px"></div>
+        <div style="font-family:'Cormorant Garamond',serif;font-size:clamp(22px,3vw,36px);font-weight:200;color:#111;line-height:1.5;margin-bottom:20px">Your consideration has been received.</div>
+        <div style="font-family:'Cormorant Garamond',serif;font-size:clamp(14px,1.3vw,16px);font-weight:300;font-style:italic;color:#555;line-height:1.75">We review all requests personally.<br>You will hear from us.</div>
+        <div style="width:0.5px;height:48px;background:linear-gradient(to top,transparent,rgba(167,134,82,0.4));margin:48px auto 0"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── OVERLAY: RESERVATION ── -->
+<div class="sec-overlay" id="overlay-reservation" style="background:#f2ede6">
+  <div class="sec-overlay-back" onclick="closeOverlay('overlay-reservation')" style="color:#111">← Back</div>
+  <div style="min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:100px clamp(24px,8vw,120px) 80px">
+    <div style="width:100%;max-width:520px">
+      <div id="reservation-form-wrap">
+        <div style="font-family:'Inter',sans-serif;font-size:8px;letter-spacing:0.55em;color:#A78652;text-transform:uppercase;margin-bottom:12px;text-indent:0.55em">Dining</div>
+        <div style="font-family:'Cormorant Garamond',serif;font-size:clamp(28px,4vw,52px);font-weight:200;color:#111;letter-spacing:0.03em;margin-bottom:12px">Reserve a Table</div>
+        <div style="font-family:'Cormorant Garamond',serif;font-size:clamp(14px,1.3vw,16px);font-weight:300;font-style:italic;color:#555;line-height:1.7;margin-bottom:56px">The dining room is open to members and their guests.</div>
+        <form onsubmit="handleReservation(event)" style="display:flex;flex-direction:column">
+          <div style="border-bottom:0.5px solid rgba(0,0,0,0.1);border-top:0.5px solid rgba(0,0,0,0.1);display:flex;align-items:center">
+            <label style="font-family:'Inter',sans-serif;font-size:7.5px;letter-spacing:0.45em;color:#A78652;text-transform:uppercase;white-space:nowrap;flex-shrink:0;width:80px;opacity:0.8;text-indent:0.45em">Name</label>
+            <input type="text" name="name" required placeholder="Your name" style="background:transparent;border:none;outline:none;padding:18px 0;font-family:'Cormorant Garamond',serif;font-size:15px;font-weight:300;color:#111;width:100%;letter-spacing:0.02em">
+          </div>
+          <div style="border-bottom:0.5px solid rgba(0,0,0,0.1);display:flex;align-items:center">
+            <label style="font-family:'Inter',sans-serif;font-size:7.5px;letter-spacing:0.45em;color:#A78652;text-transform:uppercase;white-space:nowrap;flex-shrink:0;width:80px;opacity:0.8;text-indent:0.45em">Email</label>
+            <input type="email" name="email" required placeholder="Your email" style="background:transparent;border:none;outline:none;padding:18px 0;font-family:'Cormorant Garamond',serif;font-size:15px;font-weight:300;color:#111;width:100%;letter-spacing:0.02em">
+          </div>
+          <div style="border-bottom:0.5px solid rgba(0,0,0,0.1);display:flex;align-items:center">
+            <label style="font-family:'Inter',sans-serif;font-size:7.5px;letter-spacing:0.45em;color:#A78652;text-transform:uppercase;white-space:nowrap;flex-shrink:0;width:80px;opacity:0.8;text-indent:0.45em">Date</label>
+            <input type="date" name="date" required style="background:transparent;border:none;outline:none;padding:18px 0;font-family:'Cormorant Garamond',serif;font-size:15px;font-weight:300;color:#111;width:100%;letter-spacing:0.02em;-webkit-appearance:none;appearance:none">
+          </div>
+          <div style="border-bottom:0.5px solid rgba(0,0,0,0.1);display:flex;align-items:center">
+            <label style="font-family:'Inter',sans-serif;font-size:7.5px;letter-spacing:0.45em;color:#A78652;text-transform:uppercase;white-space:nowrap;flex-shrink:0;width:80px;opacity:0.8;text-indent:0.45em">Time</label>
+            <select name="time" required style="background:transparent;border:none;outline:none;padding:18px 0;font-family:'Cormorant Garamond',serif;font-size:15px;font-weight:300;color:#111;width:100%;letter-spacing:0.02em;-webkit-appearance:none;appearance:none;cursor:pointer">
+              <option value="" disabled selected style="color:#999">Preferred time</option>
+              <option value="lunch-1230">Lunch 12:30</option>
+              <option value="lunch-130">Lunch 1:30</option>
+              <option value="dinner-700">Dinner 7:00</option>
+              <option value="dinner-730">Dinner 7:30</option>
+              <option value="dinner-800">Dinner 8:00</option>
+              <option value="dinner-830">Dinner 8:30</option>
+            </select>
+          </div>
+          <div style="border-bottom:0.5px solid rgba(0,0,0,0.1);display:flex;align-items:center">
+            <label style="font-family:'Inter',sans-serif;font-size:7.5px;letter-spacing:0.45em;color:#A78652;text-transform:uppercase;white-space:nowrap;flex-shrink:0;width:80px;opacity:0.8;text-indent:0.45em">Guests</label>
+            <select name="guests" required style="background:transparent;border:none;outline:none;padding:18px 0;font-family:'Cormorant Garamond',serif;font-size:15px;font-weight:300;color:#111;width:100%;letter-spacing:0.02em;-webkit-appearance:none;appearance:none;cursor:pointer">
+              <option value="" disabled selected style="color:#999">Party size</option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+              <option value="6">6</option>
+              <option value="7">7</option>
+              <option value="8">8</option>
+            </select>
+          </div>
+          <div style="border-bottom:0.5px solid rgba(0,0,0,0.1);display:flex;align-items:flex-start;padding-top:4px">
+            <label style="font-family:'Inter',sans-serif;font-size:7.5px;letter-spacing:0.45em;color:#A78652;text-transform:uppercase;white-space:nowrap;flex-shrink:0;width:80px;opacity:0.8;text-indent:0.45em;padding-top:18px">Notes</label>
+            <textarea name="notes" placeholder="Any special requests" rows="3" style="background:transparent;border:none;outline:none;padding:18px 0;font-family:'Cormorant Garamond',serif;font-size:15px;font-weight:300;color:#111;width:100%;letter-spacing:0.02em;resize:none;line-height:1.6"></textarea>
+          </div>
+          <button type="submit" style="margin-top:40px;background:transparent;border:0.5px solid rgba(167,134,82,0.45);color:#A78652;font-family:'Inter',sans-serif;font-size:8px;letter-spacing:0.55em;text-transform:uppercase;padding:18px;cursor:pointer;transition:border-color 0.3s,background 0.3s;text-indent:0.55em" onmouseover="this.style.borderColor='rgba(167,134,82,0.9)';this.style.background='rgba(167,134,82,0.05)'" onmouseout="this.style.borderColor='rgba(167,134,82,0.45)';this.style.background='transparent'">Request Reservation</button>
+        </form>
+      </div>
+      <div id="reservation-confirm" style="display:none;text-align:center;padding:40px 0">
+        <div style="width:0.5px;height:48px;background:linear-gradient(to bottom,transparent,rgba(167,134,82,0.4));margin:0 auto 48px"></div>
+        <div style="font-family:'Cormorant Garamond',serif;font-size:clamp(22px,3vw,36px);font-weight:200;color:#111;line-height:1.5;margin-bottom:20px">Your reservation request has been received.</div>
+        <div style="font-family:'Cormorant Garamond',serif;font-size:clamp(14px,1.3vw,16px);font-weight:300;font-style:italic;color:#555;line-height:1.75">Confirmation will be sent by email.</div>
+        <div style="width:0.5px;height:48px;background:linear-gradient(to top,transparent,rgba(167,134,82,0.4));margin:48px auto 0"></div>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -1373,7 +1507,7 @@ body{
 
   <!-- HERO -->
   <div style="position:relative;height:100vh;overflow:hidden;background:#0a0704;display:flex;align-items:flex-end">
-    <img src="library.png" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;opacity:0.5;filter:brightness(0.6) sepia(0.45) contrast(1.05)">
+    <img src="cellar.png" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;opacity:0.5;filter:brightness(0.6) sepia(0.45) contrast(1.05)">
     <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(6,4,2,0.97) 0%,rgba(6,4,2,0.35) 55%,rgba(6,4,2,0.1) 100%)"></div>
     <div style="position:relative;z-index:2;padding:0 clamp(32px,8vw,120px) 80px;max-width:820px">
       <div style="font-family:'Inter',sans-serif;font-size:7px;letter-spacing:0.7em;color:var(--brass);text-transform:uppercase;text-indent:0.7em;margin-bottom:40px;opacity:0.6">Wine Gatherings</div>
@@ -1451,7 +1585,7 @@ body{
 
   <!-- HERO -->
   <div style="position:relative;height:100vh;overflow:hidden;background:#0d0c0a;display:flex;align-items:flex-end">
-    <img src="library.png" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center top;opacity:0.45;filter:brightness(0.6) sepia(0.15) contrast(1.1)">
+    <img src="salon.png" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center top;opacity:0.45;filter:brightness(0.6) sepia(0.15) contrast(1.1)">
     <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(8,7,5,0.98) 0%,rgba(8,7,5,0.4) 55%,rgba(8,7,5,0.1) 100%)"></div>
     <div style="position:relative;z-index:2;padding:0 clamp(32px,8vw,120px) 80px;max-width:820px">
       <div style="font-family:'Inter',sans-serif;font-size:7px;letter-spacing:0.7em;color:var(--brass);text-transform:uppercase;text-indent:0.7em;margin-bottom:40px;opacity:0.6">Architecture Salons</div>
@@ -1542,6 +1676,78 @@ body{
       <div style="display:flex;align-items:baseline;gap:32px;padding:28px 0;border-bottom:0.5px solid rgba(242,237,230,0.08)"><span style="font-family:'Cormorant Garamond',serif;font-size:clamp(22px,2.6vw,38px);font-weight:300;color:var(--ivory)">Wine Gatherings</span><span style="font-family:'Inter',sans-serif;font-size:8px;letter-spacing:0.4em;color:var(--brass);opacity:0.6;margin-left:auto">The Cellar</span></div>
     </div>
   </div>
+</div>
+
+<!-- ── OVERLAY: PRIVATE SCREENINGS ── -->
+<div class="sec-overlay" id="overlay-screenings" style="overflow-y:auto">
+  <div class="sec-overlay-back" onclick="closeOverlay('overlay-screenings')">← Back</div>
+
+  <!-- HERO -->
+  <div style="position:relative;height:100vh;overflow:hidden;background:#080608;display:flex;align-items:flex-end">
+    <img src="library.png" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;opacity:0.4;filter:brightness(0.55) sepia(0.1) contrast(1.1)">
+    <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(6,4,8,0.98) 0%,rgba(6,4,8,0.4) 55%,rgba(6,4,8,0.1) 100%)"></div>
+    <div style="position:relative;z-index:2;padding:0 clamp(32px,8vw,120px) 80px;max-width:820px">
+      <div style="font-family:'Inter',sans-serif;font-size:7px;letter-spacing:0.7em;color:var(--brass);text-transform:uppercase;text-indent:0.7em;margin-bottom:40px;opacity:0.6">Private Screenings</div>
+      <div style="font-family:'Cormorant Garamond',serif;font-size:clamp(40px,6vw,86px);font-weight:200;color:var(--ivory);line-height:1.05;letter-spacing:0.02em">For films that<br><em style="font-style:italic;opacity:0.55">deserve a room.</em></div>
+    </div>
+  </div>
+
+  <!-- WHY THEY EXIST -->
+  <div style="background:#f7f4ef;padding:clamp(80px,12vw,160px) clamp(32px,10vw,200px)">
+    <div style="max-width:640px">
+      <div style="font-family:'Inter',sans-serif;font-size:7px;letter-spacing:0.6em;color:#999;text-transform:uppercase;text-indent:0.6em;margin-bottom:48px">Why They Exist</div>
+      <div style="font-family:'Cormorant Garamond',serif;font-size:clamp(26px,3.2vw,46px);font-weight:300;color:#1a1410;line-height:1.45;letter-spacing:0.01em">Not every film should be watched alone.</div>
+      <div style="width:40px;height:0.5px;background:#c4a870;margin:48px 0"></div>
+      <div style="font-family:'Cormorant Garamond',serif;font-size:clamp(16px,1.6vw,22px);font-weight:300;color:#4a4338;line-height:1.85;letter-spacing:0.02em">Private Screenings bring a small audience together around a single film. A conversation follows. The room shapes what was just watched.</div>
+    </div>
+  </div>
+
+  <!-- THE FORMAT -->
+  <div style="background:#070506;padding:clamp(80px,12vw,160px) clamp(32px,10vw,200px)">
+    <div style="font-family:'Inter',sans-serif;font-size:7px;letter-spacing:0.6em;color:var(--brass);text-transform:uppercase;text-indent:0.6em;margin-bottom:80px;opacity:0.6">The Format</div>
+    <div style="display:flex;flex-direction:column">
+      <div style="display:flex;align-items:baseline;gap:clamp(24px,4vw,80px);padding:36px 0;border-bottom:0.5px solid rgba(242,237,230,0.06)">
+        <div style="font-family:'Inter',sans-serif;font-size:7px;letter-spacing:0.4em;color:var(--brass);opacity:0.5;min-width:60px">01</div>
+        <div style="font-family:'Cormorant Garamond',serif;font-size:clamp(22px,2.8vw,40px);font-weight:300;color:var(--ivory);flex:1">A curated selection.</div>
+        <div style="font-family:'Inter',sans-serif;font-size:9px;letter-spacing:0.08em;color:rgba(242,237,230,0.32);max-width:260px;line-height:1.6;text-align:right">Chosen by members and guests of Le Loup. One film, one evening.</div>
+      </div>
+      <div style="display:flex;align-items:baseline;gap:clamp(24px,4vw,80px);padding:36px 0;border-bottom:0.5px solid rgba(242,237,230,0.06)">
+        <div style="font-family:'Inter',sans-serif;font-size:7px;letter-spacing:0.4em;color:var(--brass);opacity:0.5;min-width:60px">02</div>
+        <div style="font-family:'Cormorant Garamond',serif;font-size:clamp(22px,2.8vw,40px);font-weight:300;color:var(--ivory);flex:1">A small audience.</div>
+        <div style="font-family:'Inter',sans-serif;font-size:9px;letter-spacing:0.08em;color:rgba(242,237,230,0.32);max-width:260px;line-height:1.6;text-align:right">Intimate by design. The room stays small so what follows feels genuine.</div>
+      </div>
+      <div style="display:flex;align-items:baseline;gap:clamp(24px,4vw,80px);padding:36px 0">
+        <div style="font-family:'Inter',sans-serif;font-size:7px;letter-spacing:0.4em;color:var(--brass);opacity:0.5;min-width:60px">03</div>
+        <div style="font-family:'Cormorant Garamond',serif;font-size:clamp(22px,2.8vw,40px);font-weight:300;color:var(--ivory);flex:1">A conversation after.</div>
+        <div style="font-family:'Inter',sans-serif;font-size:9px;letter-spacing:0.08em;color:rgba(242,237,230,0.32);max-width:260px;line-height:1.6;text-align:right">Not a review. A response. The film is the beginning, not the end.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- WHAT IS SHOWN -->
+  <div style="background:#f7f4ef;padding:clamp(80px,12vw,160px) clamp(32px,10vw,200px)">
+    <div style="font-family:'Inter',sans-serif;font-size:7px;letter-spacing:0.6em;color:#999;text-transform:uppercase;text-indent:0.6em;margin-bottom:72px">What Is Shown</div>
+    <div style="display:flex;flex-direction:column">
+      <div style="font-family:'Cormorant Garamond',serif;font-size:clamp(28px,4vw,60px);font-weight:200;color:#1a1714;line-height:1.1;padding:18px 0;border-bottom:0.5px solid rgba(26,23,20,0.1)">New work from independent filmmakers.</div>
+      <div style="font-family:'Cormorant Garamond',serif;font-size:clamp(28px,4vw,60px);font-weight:200;color:#1a1714;line-height:1.1;padding:18px 0;border-bottom:0.5px solid rgba(26,23,20,0.1)">Documentary and long-form journalism.</div>
+      <div style="font-family:'Cormorant Garamond',serif;font-size:clamp(28px,4vw,60px);font-weight:200;color:#1a1714;line-height:1.1;padding:18px 0;border-bottom:0.5px solid rgba(26,23,20,0.1)">Classic cinema, revisited.</div>
+      <div style="font-family:'Cormorant Garamond',serif;font-size:clamp(28px,4vw,60px);font-weight:200;color:#1a1714;line-height:1.1;padding:18px 0">Work in progress, shown before release.</div>
+    </div>
+  </div>
+
+  <!-- FULL-WIDTH IMAGE MOMENT -->
+  <div style="position:relative;height:70vh;overflow:hidden;background:#060406">
+    <img src="roof.png" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;opacity:0.45;filter:brightness(0.55) sepia(0.2)">
+    <div style="position:absolute;inset:0;background:linear-gradient(to bottom,rgba(6,4,8,0.25),rgba(6,4,8,0.75))"></div>
+  </div>
+
+  <!-- INVITATION -->
+  <div style="background:#070506;padding:clamp(80px,12vw,160px) clamp(32px,10vw,200px);text-align:center;border-top:0.5px solid rgba(242,237,230,0.04)">
+    <div style="font-family:'Inter',sans-serif;font-size:7px;letter-spacing:0.6em;color:var(--brass);text-transform:uppercase;text-indent:0.6em;margin-bottom:40px;opacity:0.6">Invitation</div>
+    <div style="font-family:'Cormorant Garamond',serif;font-size:clamp(20px,2.4vw,34px);font-weight:200;color:var(--ivory);line-height:1.6;margin-bottom:64px;letter-spacing:0.02em">Screenings are held in The House.<br><em style="font-style:italic;opacity:0.45">Attendance is limited. Programming is chosen by members and guests of Le Loup.</em></div>
+    <div onclick="closeOverlay('overlay-screenings');openOverlay('overlay-consideration')" style="display:inline-block;font-family:'Inter',sans-serif;font-size:7.5px;letter-spacing:0.55em;text-indent:0.55em;color:var(--brass);text-transform:uppercase;border:0.5px solid rgba(167,134,82,0.35);padding:18px 40px;cursor:pointer;transition:border-color 0.3s,opacity 0.3s;opacity:0.85" onmouseover="this.style.borderColor='rgba(167,134,82,0.8)';this.style.opacity='1'" onmouseout="this.style.borderColor='rgba(167,134,82,0.35)';this.style.opacity='0.85'">Request Consideration</div>
+  </div>
+
 </div>
 
 <script>
@@ -2040,6 +2246,43 @@ function closeMobileNav(){
   document.getElementById('nav-burger').classList.remove('open');
   document.getElementById('mobile-nav').classList.remove('open');
 }
+
+// FORM HANDLERS
+function handleConsideration(e){
+  e.preventDefault();
+  document.getElementById('consideration-form-wrap').style.display = 'none';
+  document.getElementById('consideration-confirm').style.display = 'block';
+}
+
+function handleReservation(e){
+  e.preventDefault();
+  document.getElementById('reservation-form-wrap').style.display = 'none';
+  document.getElementById('reservation-confirm').style.display = 'block';
+}
+
+// Reset forms when overlays close
+const originalClose = window.closeOverlay;
+window.closeOverlay = function(id){
+  originalClose(id);
+  if(id === 'overlay-consideration'){
+    const form = document.getElementById('consideration-form-wrap');
+    const confirm = document.getElementById('consideration-confirm');
+    if(form && confirm){
+      form.style.display = 'block';
+      confirm.style.display = 'none';
+      form.querySelector('form').reset();
+    }
+  }
+  if(id === 'overlay-reservation'){
+    const form = document.getElementById('reservation-form-wrap');
+    const confirm = document.getElementById('reservation-confirm');
+    if(form && confirm){
+      form.style.display = 'block';
+      confirm.style.display = 'none';
+      form.querySelector('form').reset();
+    }
+  }
+};
 </script>
 </body>
 </html>
